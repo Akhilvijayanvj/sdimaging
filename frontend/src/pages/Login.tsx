@@ -19,7 +19,7 @@ export function Login() {
     try {
       const url = import.meta.env.VITE_API_URL 
         ? `${import.meta.env.VITE_API_URL}/auth/login`
-        : `http://${window.location.hostname}:3001/api/auth/login`;
+        : (import.meta.env.PROD ? '/api/auth/login' : `http://${window.location.hostname}:3001/api/auth/login`);
       
       const res = await fetch(url, {
         method: 'POST',
