@@ -17,7 +17,11 @@ export function Login() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:3001/api/auth/login', {
+      const url = import.meta.env.VITE_API_URL 
+        ? `${import.meta.env.VITE_API_URL}/auth/login`
+        : `http://${window.location.hostname}:3001/api/auth/login`;
+      
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

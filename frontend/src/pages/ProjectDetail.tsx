@@ -126,20 +126,20 @@ export function ProjectDetail() {
   );
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 pb-12 h-[calc(100vh-6rem)] flex flex-col">
+    <div className="space-y-6 animate-in fade-in duration-500 pb-12 lg:h-[calc(100vh-6rem)] flex flex-col">
       {/* Top Header Ribbon */}
       <div className="flex flex-col gap-4 shrink-0 bg-card/40 backdrop-blur-md border border-border p-5 rounded-xl shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="p-2 bg-muted hover:bg-muted/80 rounded-full transition-colors">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-start md:items-center gap-4">
+            <Link to="/" className="p-2 bg-muted hover:bg-muted/80 rounded-full transition-colors shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground flex flex-wrap items-center gap-2 sm:gap-3">
                 {project.clientName}
-                <span className="text-sm font-mono text-muted-foreground bg-background px-2 py-0.5 rounded border border-border/50">{project.id}</span>
+                <span className="text-xs sm:text-sm font-mono text-muted-foreground bg-background px-2 py-0.5 rounded border border-border/50">{project.id}</span>
               </h1>
-              <div className="flex items-center gap-4 mt-2 text-sm font-medium">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-2 text-xs sm:text-sm font-medium">
                 <span className="text-primary flex items-center gap-1.5 bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20"><User className="w-3.5 h-3.5" /> {project.currentDepartment}</span>
                 <span className="text-muted-foreground flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5"/> {new Date(project.eventDate).toLocaleDateString()}</span>
                 <span className="text-muted-foreground">{project.eventType}</span>
@@ -150,7 +150,7 @@ export function ProjectDetail() {
             </div>
           </div>
           
-          <div className="text-right">
+          <div className="text-left md:text-right">
             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Status</p>
             <p className="font-bold text-lg text-foreground">{project.status}</p>
           </div>
@@ -159,11 +159,11 @@ export function ProjectDetail() {
         <div className="h-px bg-border/50 w-full my-1"></div>
 
         {/* Quick Assign & Storage */}
-        <div className="flex items-center gap-6 overflow-x-auto hide-scrollbar">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-6">
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Color:</span>
             {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary max-w-[120px]" value={project.colorGraderId || ''} onChange={(e) => updateField('colorGraderId', e.target.value || null)}>
+              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.colorGraderId || ''} onChange={(e) => updateField('colorGraderId', e.target.value || null)}>
                 <option value="">--</option>
                 {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
               </select>
@@ -172,7 +172,7 @@ export function ProjectDetail() {
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Album:</span>
             {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary max-w-[120px]" value={project.albumDesignerId || ''} onChange={(e) => updateField('albumDesignerId', e.target.value || null)}>
+              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.albumDesignerId || ''} onChange={(e) => updateField('albumDesignerId', e.target.value || null)}>
                 <option value="">--</option>
                 {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
               </select>
@@ -181,7 +181,7 @@ export function ProjectDetail() {
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">HL Video:</span>
             {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary max-w-[120px]" value={project.highlightVideoEditorId || ''} onChange={(e) => updateField('highlightVideoEditorId', e.target.value || null)}>
+              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.highlightVideoEditorId || ''} onChange={(e) => updateField('highlightVideoEditorId', e.target.value || null)}>
                 <option value="">--</option>
                 {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
               </select>
@@ -190,7 +190,7 @@ export function ProjectDetail() {
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Full Video:</span>
             {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary max-w-[120px]" value={project.fullVideoEditorId || ''} onChange={(e) => updateField('fullVideoEditorId', e.target.value || null)}>
+              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.fullVideoEditorId || ''} onChange={(e) => updateField('fullVideoEditorId', e.target.value || null)}>
                 <option value="">--</option>
                 {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
               </select>
@@ -200,23 +200,23 @@ export function ProjectDetail() {
           <div className="w-px h-4 bg-border mx-2"></div>
 
           <div className="flex items-center gap-2">
-            <HardDrive className="w-3.5 h-3.5 text-muted-foreground" />
+            <HardDrive className="w-3.5 h-3.5 text-muted-foreground hidden sm:block" />
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">B1:</span>
-            <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary w-24" value={project.backupHdd1Id || ''} onChange={(e) => updateField('backupHdd1Id', e.target.value || null)}>
+            <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.backupHdd1Id || ''} onChange={(e) => updateField('backupHdd1Id', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">B2:</span>
-            <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary w-24" value={project.backupHdd2Id || ''} onChange={(e) => updateField('backupHdd2Id', e.target.value || null)}>
+            <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.backupHdd2Id || ''} onChange={(e) => updateField('backupHdd2Id', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">LR:</span>
-            <select className="p-1 bg-muted border border-border rounded text-xs outline-none focus:ring-1 focus:ring-primary w-24" value={project.lightroomHddId || ''} onChange={(e) => updateField('lightroomHddId', e.target.value || null)}>
+            <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.lightroomHddId || ''} onChange={(e) => updateField('lightroomHddId', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
             </select>
@@ -225,11 +225,11 @@ export function ProjectDetail() {
       </div>
 
       {/* Main Content: 4 Columns */}
-      <div className="flex-1 overflow-x-auto hide-scrollbar">
-        <div className="flex gap-4 h-full min-w-max pb-4">
+      <div className="flex-1 overflow-x-auto overflow-y-visible lg:overflow-y-hidden hide-scrollbar">
+        <div className="flex flex-col lg:flex-row gap-4 h-auto lg:h-full lg:min-w-max pb-4">
           
           {/* COLUMN 1 */}
-          <div className="w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-sm h-full">
+          <div className="w-full lg:w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-sm h-auto lg:h-full shrink-0">
             <div className="px-4 py-3 border-b border-primary/20 shrink-0 bg-primary/10">
               <h3 className="font-black text-sm tracking-widest uppercase text-primary">1. Quick Deliverables</h3>
             </div>
@@ -258,7 +258,7 @@ export function ProjectDetail() {
           </div>
 
           {/* COLUMN 2 */}
-          <div className="w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-amber-500/20 rounded-xl overflow-hidden shadow-sm h-full">
+          <div className="w-full lg:w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-border rounded-xl overflow-hidden shadow-sm h-auto lg:h-full shrink-0">
             <div className="px-4 py-3 border-b border-amber-500/20 shrink-0 bg-amber-500/10">
               <h3 className="font-black text-sm tracking-widest uppercase text-amber-500">2. Album Workflow</h3>
             </div>
@@ -324,7 +324,7 @@ export function ProjectDetail() {
           </div>
 
           {/* COLUMN 4 */}
-          <div className="w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-emerald-500/20 rounded-xl overflow-hidden shadow-sm h-full">
+          <div className="w-full lg:w-[340px] flex flex-col bg-card/30 backdrop-blur-sm border border-emerald-500/20 rounded-xl overflow-hidden shadow-sm h-auto lg:h-full shrink-0">
             <div className="px-4 py-3 border-b border-emerald-500/20 shrink-0 bg-emerald-500/10">
               <h3 className="font-black text-sm tracking-widest uppercase text-emerald-500">4. Final Delivery</h3>
             </div>
