@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  username     String    @unique
+  passwordHash String
+  role         String    // ADMIN, COLOR_GRADER, ALBUM_DESIGNER, VIDEO_EDITOR
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Assignments
+  colorGradingProjects         Project[] @relation("ColorGrader")
+  albumDesignProjects          Project[] @relation("AlbumDesigner")
+  highlightVideoEditingProjects Project[] @relation("HighlightVideoEditor")
+  fullVideoEditingProjects     Project[] @relation("FullVideoEditor")
+}
+
+model HDD {
+  id               String   @id @default(uuid())
+  name             String   @unique
+  status           String   @default("Active") // Active, Archive, Damaged
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  backup1Projects    Project[] @relation("BackupHdd1")
+  backup2Projects    Project[] @relation("BackupHdd2")
+  lightroomProjects  Project[] @relation("LightroomHdd")
+}
+
+model Project {
+  id                   String   @id // e.g., WED-2026-001
+  clientName           String
+  eventType            String   // Wedding, Engagement, Baptism, Other
+  eventDate            DateTime
+  phoneNumber          String?
+  packageType          String?
+  photographer         String?
+  videographer         String?
+  notes                String?
+  lightroomCatalogPath String?
+  status               String   @default("Waiting For Backup")
+  currentDepartment    String   @default("Backup Team")
+  priority             String   @default("Medium") // High, Medium, Low
+  
+  // Assignees
+  colorGraderId          String?
+  colorGrader            User?    @relation("ColorGrader", fields: [colorGraderId], references: [id])
+  albumDesignerId        String?
+  albumDesigner          User?    @relation("AlbumDesigner", fields: [albumDesignerId], references: [id])
+  highlightVideoEditorId String?
+  highlightVideoEditor   User?    @relation("HighlightVideoEditor", fields: [highlightVideoEditorId], references: [id])
+  fullVideoEditorId      String?
+  fullVideoEditor        User?    @relation("FullVideoEditor", fields: [fullVideoEditorId], references: [id])
+  
+  // Storage Locations
+  backupHdd1Id         String?
+  backupHdd1           HDD?     @relation("BackupHdd1", fields: [backupHdd1Id], references: [id])
+  backupHdd2Id         String?
+  backupHdd2           HDD?     @relation("BackupHdd2", fields: [backupHdd2Id], references: [id])
+  backupDate           DateTime?
+  
+  lightroomHddId       String?
+  lightroomHdd         HDD?     @relation("LightroomHdd", fields: [lightroomHddId], references: [id])
+
+  // Checklist Details
+  checklist            ProjectChecklist?
+
+  // Timeline Activity
+  activities           ActivityLog[]
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model ProjectChecklist {
+  id                        String  @id @default(uuid())
+  projectId                 String  @unique
+  project                   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Backup Stage
+  isBackupCompleted         Boolean @default(false)
+  
+  // Highlight Stage
+  isHighlightSelectionCompleted Boolean @default(false)
+  isHighlightRetouchingCompleted  Boolean @default(false)
+  isHighlightGradingCompleted     Boolean @default(false)
+  isHighlightExportCompleted      Boolean @default(false)
+  isHighlightDeliveredToClient    Boolean @default(false)
+  highlightDeliveryDate           DateTime?
+
+  // Lightroom Preparation
+  isImportedToLightroom     Boolean @default(false)
+  isRenamedByCaptureTime    Boolean @default(false)
+  isCulledUsingAfterShoot   Boolean @default(false)
+  isUploadedToFotoOwl       Boolean @default(false)
+  
+  // Client Selection
+  isSelectionSent           Boolean @default(false)
+  isSelectionReceived       Boolean @default(false)
+  selectionDate             DateTime?
+
+  // Album Workflow
+  isAlbumGradingCompleted   Boolean @default(false)
+  isAlbumExportCompleted    Boolean @default(false)
+  isAlbumDesignCompleted    Boolean @default(false)
+  isClientApprovalReceived  Boolean @default(false)
+  isSentForPrinting         Boolean @default(false)
+  isPrintingCompleted       Boolean @default(false)
+  isAlbumDelivered          Boolean @default(false)
+
+  // Photo Frame Workflow
+  isFrameSelected           Boolean @default(false)
+  isFramePrinted            Boolean @default(false)
+  isFrameDelivered          Boolean @default(false)
+
+  // Video Workflow
+  isReelEditingStarted      Boolean @default(false)
+  isReelEditingCompleted    Boolean @default(false)
+  isReelDelivered           Boolean @default(false)
+  
+  isHighlightVideoEditingStarted   Boolean @default(false)
+  isHighlightVideoEditingCompleted Boolean @default(false)
+  isHighlightVideoDelivered        Boolean @default(false)
+
+  isFullVideoEditingStarted   Boolean @default(false)
+  isFullVideoEditingCompleted Boolean @default(false)
+  isFullVideoDelivered        Boolean @default(false)
+
+  // Final Delivery
+  isPendrivePrepared        Boolean @default(false)
+  isVideosCopied            Boolean @default(false)
+  isProjectClosed           Boolean @default(false)
+}
+
+model ActivityLog {
+  id          String   @id @default(uuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  description String
+  createdAt   DateTime @default(now())
+}
