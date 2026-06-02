@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../lib/api';
 import { Link } from 'react-router-dom';
-import { Plus, Search, LayoutGrid, List, Calendar as CalendarIcon, CheckCircle2 } from 'lucide-react';
+import { Plus, Search, LayoutGrid, List, Calendar as CalendarIcon } from 'lucide-react';
 import { cn } from '../components/Layout';
 
 export function Projects() {

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { api } from '../lib/api';
 import { useParams, Link } from 'react-router-dom';
 import { 
-  ArrowLeft, HardDrive, User, Calendar, Phone, Camera, Video,
-  CheckCircle2, Circle, Clock, Activity, Folder, Shield, AlertTriangle
+  ArrowLeft, HardDrive, User, Calendar,
+  CheckCircle2, AlertTriangle
 } from 'lucide-react';
 import { cn } from '../components/Layout';
 import { useAuth } from '../lib/AuthContext';

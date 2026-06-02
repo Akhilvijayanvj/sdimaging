@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 import { Link } from 'react-router-dom';
-import { Users, Clock, CheckCircle2, Image, Video, Monitor, AlertCircle } from 'lucide-react';
+import { Users, Clock, CheckCircle2, Image, Monitor } from 'lucide-react';
 
 export function Dashboard() {
   const [projects, setProjects] = useState<any[]>([]);

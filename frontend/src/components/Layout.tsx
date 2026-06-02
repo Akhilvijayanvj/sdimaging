@@ -4,7 +4,6 @@ import {
   LayoutDashboard, 
   FolderOpen, 
   HardDrive, 
-  Settings, 
   Moon, 
   Sun,
   Menu,
