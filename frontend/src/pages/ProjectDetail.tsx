@@ -158,46 +158,8 @@ export function ProjectDetail() {
 
         <div className="h-px bg-border/50 w-full my-1"></div>
 
-        {/* Quick Assign & Storage */}
+        {/* Storage */}
         <div className="flex flex-wrap items-center gap-3 sm:gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Color:</span>
-            {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.colorGraderId || ''} onChange={(e) => updateField('colorGraderId', e.target.value || null)}>
-                <option value="">--</option>
-                {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
-              </select>
-            ) : <span className="text-xs">{project.colorGrader?.username || '--'}</span>}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Album:</span>
-            {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.albumDesignerId || ''} onChange={(e) => updateField('albumDesignerId', e.target.value || null)}>
-                <option value="">--</option>
-                {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
-              </select>
-            ) : <span className="text-xs">{project.albumDesigner?.username || '--'}</span>}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">HL Video:</span>
-            {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.highlightVideoEditorId || ''} onChange={(e) => updateField('highlightVideoEditorId', e.target.value || null)}>
-                <option value="">--</option>
-                {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
-              </select>
-            ) : <span className="text-xs">{project.highlightVideoEditor?.username || '--'}</span>}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Full Video:</span>
-            {currentUser?.role === 'ADMIN' ? (
-              <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.fullVideoEditorId || ''} onChange={(e) => updateField('fullVideoEditorId', e.target.value || null)}>
-                <option value="">--</option>
-                {users.map(u => <option key={u.id} value={u.id}>{u.username}</option>)}
-              </select>
-            ) : <span className="text-xs">{project.fullVideoEditor?.username || '--'}</span>}
-          </div>
-          
-          <div className="w-px h-4 bg-border mx-2"></div>
 
           <div className="flex items-center gap-2">
             <HardDrive className="w-3.5 h-3.5 text-muted-foreground hidden sm:block" />
