@@ -42,7 +42,7 @@ export function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md bg-card border border-border rounded-xl shadow-xl p-8 animate-in fade-in zoom-in duration-500">
+      <div className="w-full max-w-md bg-card border border-border rounded-xl shadow-xl p-6 sm:p-8 animate-in fade-in zoom-in duration-500">
         <div className="flex flex-col items-center mb-8">
           <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
             <Lock className="w-6 h-6 text-primary" />

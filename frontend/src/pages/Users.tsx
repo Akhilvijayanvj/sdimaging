@@ -57,7 +57,7 @@ export function Users() {
         <h1 className="text-3xl font-bold tracking-tight">Team Management</h1>
       </div>
 
-      <div className="bg-card border border-border rounded-xl shadow-sm p-6 sm:p-8">
+      <div className="bg-card border border-border rounded-xl shadow-sm p-4 sm:p-8">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <UserPlus className="w-5 h-5 text-primary" /> Add New Staff Member
         </h2>
@@ -102,7 +102,7 @@ export function Users() {
               )}
             </div>
           </div>
-          <button type="submit" className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-sm h-[42px]">
+          <button type="submit" className="w-full md:w-auto px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-sm h-[42px] mt-2 md:mt-0">
             Add User
           </button>
         </form>

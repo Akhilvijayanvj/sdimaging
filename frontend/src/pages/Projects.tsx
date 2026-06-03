@@ -41,7 +41,7 @@ export function Projects() {
           <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
           <p className="text-muted-foreground mt-1">Manage all studio projects and track their progress.</p>
         </div>
-        <Link to="/projects/new" className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium transition-colors shadow-sm flex items-center gap-2">
+        <Link to="/projects/new" className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
           <Plus className="w-5 h-5" />
           New Project
         </Link>

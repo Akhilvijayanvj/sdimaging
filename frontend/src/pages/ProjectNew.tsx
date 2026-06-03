@@ -66,7 +66,7 @@ export function ProjectNew() {
         <h1 className="text-3xl font-bold tracking-tight">New Project</h1>
       </div>
 
-      <div className="bg-card border border-border rounded-xl shadow-sm p-6 sm:p-8">
+      <div className="bg-card border border-border rounded-xl shadow-sm p-4 sm:p-8">
         <form onSubmit={handleSubmit} className="space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
