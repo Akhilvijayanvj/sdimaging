@@ -155,21 +155,21 @@ export function ProjectDetail() {
 
           <div className="flex items-center gap-2">
             <HardDrive className="w-3.5 h-3.5 text-muted-foreground hidden sm:block" />
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">B1:</span>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Backup HDD 1:</span>
             <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.backupHdd1Id || ''} onChange={(e) => updateField('backupHdd1Id', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">B2:</span>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Backup HDD 2:</span>
             <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.backupHdd2Id || ''} onChange={(e) => updateField('backupHdd2Id', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">LR:</span>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Lightroom HDD:</span>
             <select className="p-1.5 sm:p-1 bg-muted border border-border rounded text-xs sm:text-sm outline-none focus:ring-1 focus:ring-primary w-28 sm:w-32" value={project.lightroomHddId || ''} onChange={(e) => updateField('lightroomHddId', e.target.value || null)}>
               <option value="">--</option>
               {hdds.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
