@@ -6,15 +6,12 @@ import {
   CheckCircle2, AlertTriangle
 } from 'lucide-react';
 import { cn } from '../components/Layout';
-import { useAuth } from '../lib/AuthContext';
 
 export function ProjectDetail() {
   const { id } = useParams();
   const [project, setProject] = useState<any>(null);
   const [hdds, setHdds] = useState<any[]>([]);
-  const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user: currentUser } = useAuth();
 
   useEffect(() => {
     fetchData();
@@ -26,14 +23,9 @@ export function ProjectDetail() {
       api.get(`/projects/${id}`),
       api.get('/hdds')
     ];
-    if (currentUser?.role === 'ADMIN') {
-      reqs.push(api.get('/users'));
-    }
-    
-    const [projData, hddData, usersData] = await Promise.all(reqs);
+    const [projData, hddData] = await Promise.all(reqs);
     setProject(projData);
     setHdds(hddData);
-    if (usersData) setUsers(usersData);
     setLoading(false);
   };
 
