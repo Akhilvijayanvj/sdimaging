@@ -49,25 +49,25 @@ export function Dashboard() {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-12">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <Link to="/projects/new" className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium transition-colors shadow-sm">
+        <Link to="/projects/new" className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium transition-colors shadow-sm text-center sm:text-left">
           + New Project
         </Link>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-card/40 backdrop-blur-md border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+          <div key={i} className="bg-card/40 backdrop-blur-md border border-border rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
             <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full ${stat.bg} opacity-20 group-hover:scale-150 transition-transform duration-500`}></div>
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between relative z-10 gap-3 sm:gap-0">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">{stat.label}</p>
-                <p className="text-3xl font-bold">{stat.value}</p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">{stat.label}</p>
+                <p className="text-2xl sm:text-3xl font-bold">{stat.value}</p>
               </div>
-              <div className={`p-3 rounded-lg ${stat.bg}`}>
-                <stat.icon className={`w-6 h-6 ${stat.color}`} />
+              <div className={`p-2 sm:p-3 rounded-lg ${stat.bg} self-start sm:self-auto`}>
+                <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.color}`} />
               </div>
             </div>
           </div>
@@ -128,14 +128,14 @@ export function Dashboard() {
 
         {/* Recent Activity */}
         <div className="flex flex-col bg-card/30 backdrop-blur-sm border border-border rounded-xl shadow-sm">
-          <div className="px-6 py-4 border-b border-border bg-muted/30">
+          <div className="px-4 sm:px-6 py-4 border-b border-border bg-muted/30">
             <h2 className="text-lg font-semibold flex items-center gap-2">
               <Clock className="w-5 h-5 text-primary" /> 
               Recent Activity
             </h2>
           </div>
-          <div className="p-6 space-y-6 relative">
-            <div className="absolute top-8 bottom-8 left-[39px] w-px bg-border"></div>
+          <div className="p-4 sm:p-6 space-y-6 relative">
+            <div className="absolute top-8 bottom-8 left-[31px] sm:left-[39px] w-px bg-border"></div>
             <div className="space-y-6 relative z-10">
               {activities.length === 0 ? (
                 <div className="text-center text-muted-foreground text-sm py-8">
