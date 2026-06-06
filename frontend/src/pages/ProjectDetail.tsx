@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { api } from '../lib/api';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, HardDrive, User, Calendar,
-  CheckCircle2, AlertTriangle
+  CheckCircle2, AlertTriangle, Trash2
 } from 'lucide-react';
 import { cn } from '../components/Layout';
 
 export function ProjectDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [project, setProject] = useState<any>(null);
   const [hdds, setHdds] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -81,6 +82,18 @@ export function ProjectDetail() {
     }
   };
 
+  const handleDelete = async () => {
+    if (confirm('Are you absolutely sure you want to delete this project? This action cannot be undone.')) {
+      try {
+        await api.delete(`/projects/${id}`);
+        navigate('/');
+      } catch (e) {
+        console.error(e);
+        alert('Failed to delete project');
+      }
+    }
+  };
+
   if (loading) return <div className="flex h-full items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>;
   if (!project) return <div>Project not found</div>;
 
@@ -142,9 +155,18 @@ export function ProjectDetail() {
             </div>
           </div>
           
-          <div className="text-left md:text-right">
-            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Status</p>
-            <p className="font-bold text-lg text-foreground">{project.status}</p>
+          <div className="text-left md:text-right flex items-start gap-4">
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Status</p>
+              <p className="font-bold text-lg text-foreground">{project.status}</p>
+            </div>
+            <button 
+              onClick={handleDelete}
+              className="p-2 text-red-500 hover:bg-red-500/10 rounded-md transition-colors ml-2"
+              title="Delete Project"
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
           </div>
         </div>
 

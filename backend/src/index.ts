@@ -248,6 +248,18 @@ app.put('/api/projects/:id', async (req, res) => {
   }
 });
 
+app.delete('/api/projects/:id', async (req, res) => {
+  try {
+    await prisma.project.delete({
+      where: { id: req.params.id }
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete project' });
+  }
+});
+
 app.put('/api/projects/:id/checklist', async (req, res) => {
   try {
     const { checklistData, logMessage } = req.body;
